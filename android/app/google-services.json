@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "931010530268",
+    "firebase_url": "https://matchmyride-37a78-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "matchmyride-37a78",
+    "storage_bucket": "matchmyride-37a78.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:931010530268:android:b8fa9fd2b6b6454e96dd19",
+        "android_client_info": {
+          "package_name": "com.yourcompany.mmr"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQ0ibqGHFYwY3c1j8ObGgX-BmVKM47cGI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

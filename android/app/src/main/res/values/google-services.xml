@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="firebase_database_url">https://matchmyride-37a78-default-rtdb.asia-southeast1.firebasedatabase.app</string>
+    <string name="gcm_defaultSenderId">931010530268</string>
+    <string name="google_api_key">AIzaSyAQ0ibqGHFYwY3c1j8ObGgX-BmVKM47cGI</string>
+    <string name="google_app_id">1:931010530268:android:b8fa9fd2b6b6454e96dd19</string>
+    <string name="google_crash_reporting_api_key">AIzaSyAQ0ibqGHFYwY3c1j8ObGgX-BmVKM47cGI</string>
+    <string name="google_storage_bucket">matchmyride-37a78.firebasestorage.app</string>
+    <string name="project_id">matchmyride-37a78</string>
+</resources>

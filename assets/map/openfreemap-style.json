@@ -1,0 +1,32 @@
+{
+  "version": 8,
+  "name": "OpenFreeMap Raster",
+  "metadata": {
+    "mapbox:autocomposite": false,
+    "mapbox:type": "template",
+    "maputnik:renderer": "mbgljs",
+    "openmaptiles:version": "3.x"
+  },
+  "sources": {
+    "openfreemap": {
+      "type": "raster",
+      "tiles": [
+        "https://tile.openfreemap.org/{z}/{x}/{y}.png"
+      ],
+      "tileSize": 256,
+      "maxzoom": 19
+    }
+  },
+  "glyphs": "https://fonts.openmaptiles.org/{fontstack}/{range}.pbf",
+  "layers": [
+    {
+      "id": "openfreemap",
+      "type": "raster",
+      "source": "openfreemap",
+      "minzoom": 0,
+      "maxzoom": 22
+    }
+  ],
+  "center": [0, 0],
+  "zoom": 2
+} 

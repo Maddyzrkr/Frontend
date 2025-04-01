@@ -1,0 +1,66 @@
+// Manual implementation of essential Google Services functionality
+// This script avoids task ordering issues with the full Google Services plugin
+
+// Create directory if it doesn't exist
+File googleServicesDir = new File("$projectDir/scripts")
+if (!googleServicesDir.exists()) {
+    googleServicesDir.mkdirs()
+}
+
+// Function to parse the google-services.json file
+def parseGoogleServices() {
+    File googleServicesFile = new File("$projectDir/google-services.json")
+    if (!googleServicesFile.exists()) {
+        logger.warn("google-services.json file not found, Firebase functionality may not work correctly")
+        return
+    }
+    
+    // Simple parsing to get essential values
+    def jsonSlurper = new groovy.json.JsonSlurper()
+    def googleServices = jsonSlurper.parseText(googleServicesFile.text)
+    
+    // Extract key values
+    def clientInfo = googleServices.client[0].client_info
+    def apiKey = googleServices.client[0].api_key[0].current_key
+    def projectInfo = googleServices.project_info
+    
+    // Create values XML file
+    File valuesDir = new File("$projectDir/src/main/res/values")
+    if (!valuesDir.exists()) {
+        valuesDir.mkdirs()
+    }
+    
+    // Create strings.xml with Firebase values
+    File stringsFile = new File("$valuesDir/google-services.xml")
+    stringsFile.text = """<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="firebase_database_url">${projectInfo.firebase_url ?: ""}</string>
+    <string name="gcm_defaultSenderId">${projectInfo.project_number}</string>
+    <string name="google_api_key">${apiKey}</string>
+    <string name="google_app_id">${clientInfo.mobilesdk_app_id}</string>
+    <string name="google_crash_reporting_api_key">${apiKey}</string>
+    <string name="google_storage_bucket">${projectInfo.storage_bucket ?: ""}</string>
+    <string name="project_id">${projectInfo.project_id}</string>
+</resources>
+"""
+}
+
+// Register a task to parse Google Services
+tasks.register('manualProcessGoogleServices') {
+    doLast {
+        parseGoogleServices()
+    }
+}
+
+// Add task dependency
+afterEvaluate {
+    tasks.matching { it.name == "processDebugResources" }.all { processResourcesTask ->
+        processResourcesTask.dependsOn(tasks.named('manualProcessGoogleServices'))
+    }
+    tasks.matching { it.name == "processReleaseResources" }.all { processResourcesTask ->
+        processResourcesTask.dependsOn(tasks.named('manualProcessGoogleServices'))
+    }
+}
+
+// Run the Google Services processor immediately
+parseGoogleServices() 
